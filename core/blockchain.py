@@ -23,7 +23,7 @@ class BlockChain(object):
         """
         在链上新建一个区块以及地址
         :param proof: <int> The proof given by the Proof of Work algorithm （新区块的工作量证明）
-        :param previous_hash: (Optional) <str> Hash of previous Block （新区块的hash值）
+        :param previous_hash: (Optional) <str> Hash of previous Block （上一个区块的hash值）
         :return: <dict> New Block （返回新建的区块）
         """
         block = {
@@ -31,7 +31,7 @@ class BlockChain(object):
             'timestamp': time(),
             'transactions': self.current_transactions,
             'proof': proof,
-            # 如果没有传递上一个区块的hash就取区块链中最后一个区块的hash
+            # 如果没有传递上一个区块的hash就计算出区块链中最后一个区块的hash
             'previous_hash': previous_hash or self.hash(self.chain[-1]),
         }
 
@@ -47,7 +47,7 @@ class BlockChain(object):
         :param sender: <str> Address of the Sender（发送方的地址）
         :param recipient: <str> Address of the Recipient （接收方的地址）
         :param amount: <int> Amount （交易数量）
-        :return: <int> The index of the Block that will hold this transaction （保存新区块的索引，并返回该索引）
+        :return: <int> The index of the Block that will hold this transaction （返回该交易事务的块的索引）
         """
         self.current_transactions.append({
             'sender': sender,

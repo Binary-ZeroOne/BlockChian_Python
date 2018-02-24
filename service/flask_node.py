@@ -28,8 +28,7 @@ def new_transaction():
 
     # 检查所需要的字段是否位于POST的data中
     required = ['sender', 'recipient', 'amount']
-    print(type(values))
-    print(values)
+
     if not all(k in values for k in required):
         return 'Missing values', 400
 
